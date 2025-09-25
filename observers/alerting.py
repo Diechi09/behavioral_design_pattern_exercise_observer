@@ -24,4 +24,5 @@ class HeatAlert(Observer):
         - Call self.notifier.send(message) to send the alert
         """
         # TODO: Your implementation here
-        pass
+        if data.temperature_c >= self.threshold_c:
+            self.notifier.send(f"Heat alert: {data.temperature_c:.1f}°C")

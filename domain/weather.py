@@ -26,8 +26,8 @@ class WeatherStation:
         Add the observer to the _observers list if not already present.
         Hint: Use 'not in' to check if observer is already subscribed.
         """
-        # TODO: Your implementation here
-        pass
+        if observer not in self._observers:
+            self._observers.append(observer)
 
     def detach(self, observer: Observer) -> None:
         """TODO: Implement observer unsubscription.
@@ -36,7 +36,8 @@ class WeatherStation:
         Hint: Use 'in' to check if observer exists before removing.
         """
         # TODO: Your implementation here
-        pass
+        if observer in self._observers:
+            self._observers.remove(observer)
 
     def set_measurements(self, temperature_c: float, humidity_pct: float) -> None:
         """TODO: Complete the notification logic.
@@ -51,6 +52,8 @@ class WeatherStation:
         data = WeatherData(temperature_c, humidity_pct)
         self._last = data
         # TODO: Add observer notification logic here
+        for observer in list(self._observers):
+            observer.update(data)
 
     def last(self) -> WeatherData | None:
         return self._last
